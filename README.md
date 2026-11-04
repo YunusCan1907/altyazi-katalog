@@ -5,7 +5,7 @@ Claude Code sohbet widget'ı bu betiği jsDelivr üzerinden yükler:
 
 ```html
 <div id="altyazi-katalog" data-is="KOD · SAAT">Katalog yükleniyor…</div>
-<script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.7/katalog.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.8/katalog.js"></script>
 ```
 
 `katalog_latin_disi.js`: Latin dışı yazılar (AR, HE, TH, JA, CN, KO, HI, BN) için yalnız 1–6.
