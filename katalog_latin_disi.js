@@ -7,12 +7,11 @@ R.removeAttribute('style');
 var H=R.shadowRoot||(R.attachShadow?R.attachShadow({mode:'open'}):null);
 if(!H){H=R;st.textContent+=CSS;}
 H.innerHTML=(H===R?'':'<style>'+CSS+'</style>')+'<div class=hd><span>Altyazı şablonu · '+IS+'</span><span class=m id=akm>Kutuya tıkla, sonra Devam et</span></div><div class=g>'+K.map(function(k){return '<div class=t data-v="'+k[0]+' '+k[1]+'"><div class=b><span class=no>'+k[0]+'</span>'+k[1]+'</div><div class=s><div class="'+k[2]+'"'+(k[3]?' style="'+k[3]+'"':'')+'>'+k[4]+'</div></div></div>';}).join('')+'</div><div class=ft><button type=button id=akg>Geri git</button><span class=m id=akn></span><button type=button id=akd>Devam et</button></div>';
-var sec=null,aks=null,yazildi=false,m=H.querySelector('#akm'),n=H.querySelector('#akn'),dv=H.querySelector('#akd'),gr=H.querySelector('#akg');
-function baglam(){return 'Altyazı kataloğu · '+IS+' — Son seçim: '+(aks==='geri'?'Geri (ilk ekran)':'Sablon '+sec);}
-function paylas(){try{if(window.app&&typeof app.sendRequest==='function'){var r=app.sendRequest({method:'ui/update-model-context',params:{content:[{type:'text',text:baglam()}]}});if(r&&r.catch)r.catch(function(){});}}catch(e){}}
-function koy(){if(yazildi)return true;if(typeof sendPrompt!=='function'){n.textContent='Sohbete yaz: '+(aks==='geri'?'geri':sec);return false;}sendPrompt('Altyazı şablonu · '+IS+' — seçim hazır');yazildi=true;return true;}
-function goster(){dv.disabled=aks==='devam';dv.textContent=aks==='devam'?'Yazı kutusuna kondu':'Devam et';gr.disabled=aks==='geri';gr.textContent=aks==='geri'?'Yazı kutusuna kondu':'Geri git';n.textContent=yazildi?'Yazı kutusuna bir kez tıkla, sonra Enter.':'';}
-H.querySelectorAll('.t').forEach(function(t){t.addEventListener('click',function(){H.querySelectorAll('.t.on').forEach(function(x){x.classList.remove('on');});t.classList.add('on');sec=t.getAttribute('data-v');m.textContent='Seçildi: '+sec;if(yazildi)aks='devam';paylas();goster();});});
-dv.addEventListener('click',function(){if(!sec){n.textContent='Önce bir kutuya tıkla.';return;}aks='devam';paylas();koy();goster();});
-gr.addEventListener('click',function(){aks='geri';paylas();koy();goster();});
+var sec=null,gon=null,bekle=false,m=H.querySelector('#akm'),n=H.querySelector('#akn'),dv=H.querySelector('#akd'),gr=H.querySelector('#akg');
+function ad(d){return d==='geri'?'Geri: ilk ekran':d;}
+function goster(){dv.disabled=bekle||(gon!==null&&gon===sec);dv.textContent=(gon!==null&&gon===sec)?'Yazı kutusuna kondu':'Devam et';gr.disabled=bekle||gon==='geri';gr.textContent=gon==='geri'?'Yazı kutusuna kondu':'Geri git';}
+function gonder(d){if(bekle||gon===d)return;var metin=gon===null?'Altyazı şablonu · '+IS+' — '+(d==='geri'?'Geri: ilk ekran':'Sablon: '+d):' → '+ad(d);var ok=function(r){bekle=false;if(r&&r.isError){n.textContent='Yazı kutusu almadı, yeniden bas.';}else{gon=d;n.textContent='Enter ile gönder.';}goster();};if(window.app&&typeof app.sendRequest==='function'){bekle=true;goster();var p;try{p=app.sendRequest({method:'ui/message',params:{role:'user',content:[{type:'text',text:metin}]}});}catch(e){p=null;}if(p&&p.then){p.then(ok,function(){ok({isError:true});});}else{ok({isError:true});}}else if(typeof sendPrompt==='function'){sendPrompt(metin);ok({});}else{n.textContent='Sohbete yaz: '+ad(d);}}
+H.querySelectorAll('.t').forEach(function(t){t.addEventListener('click',function(){H.querySelectorAll('.t.on').forEach(function(x){x.classList.remove('on');});t.classList.add('on');sec=t.getAttribute('data-v');m.textContent='Seçildi: '+sec;goster();});});
+dv.addEventListener('click',function(){if(!sec){n.textContent='Önce bir kutuya tıkla.';return;}gonder(sec);});
+gr.addEventListener('click',function(){gonder('geri');});
 })();
