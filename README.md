@@ -12,3 +12,9 @@ v2.12 (2026-11-04): her pazar kodu için `katalog_<KOD>.js` — o dilin cümlesi
 
 v2.13 (2026-11-04): 10 pazarın önizleme cümlesi Gemini 3.1 Pro + 3.8 Flash kontrolüyle düzeltildi (DE, KY, BEN, FR, IT, PL, RU, UA, AZ, HUN).
 v2.14 (2026-11-04): kutulu şablonlarda (9, 11) kutu aracın kutusuyla aynı — dilin en yüksek/derin harfine göre (Arapça, Tayca, Vietnamca, Hint, Bengal, Türkçe İ/Ş…), tarayıcıda fonta göre iç pay.
+v2.15 (2026-11-04): `adim.js` — "Adım adım özelleştir" tek widget'ta slayt slayt (harf, kart, kutu, yazı rengi, kontur, animasyon, karaoke dolumu); tıklayınca ilerler, sol altta Geri git, seçim yalnız son slaytta tek satır olarak yazı kutusuna düşer. Büyük/küçük harfi olmayan yazıda harf slaytı yok.
+
+```html
+<div id="altyazi-adim" data-is="KOD · SAAT">Yükleniyor…</div>
+<script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.15/adim.js"></script>
+```
