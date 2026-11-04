@@ -7,10 +7,12 @@ R.removeAttribute('style');
 var H=R.shadowRoot||(R.attachShadow?R.attachShadow({mode:'open'}):null);
 if(!H){H=R;st.textContent+=CSS;}
 H.innerHTML=(H===R?'':'<style>'+CSS+'</style>')+'<div class=hd><span>Altyazı şablonu · '+IS+'</span><span class=m id=akm>Kutuya tıkla, sonra Devam et</span></div><div class=g>'+K.map(function(k){return '<div class=t data-v="'+k[0]+' '+k[1]+'"><div class=b><span class=no>'+k[0]+'</span>'+k[1]+'</div><div class=s><div class="'+k[2]+'"'+(k[3]?' style="'+k[3]+'"':'')+'>'+k[4]+'</div></div></div>';}).join('')+'</div><div class=ft><button type=button id=akg>Geri git</button><span class=m id=akn></span><button type=button id=akd>Devam et</button></div>';
-var sec=null,gon=null,m=H.querySelector('#akm'),n=H.querySelector('#akn'),dv=H.querySelector('#akd'),gr=H.querySelector('#akg');
-function sifirla(){dv.disabled=false;dv.textContent='Devam et';gr.disabled=false;gr.textContent='Geri git';}
-function gonder(deger,satir,btn){if(gon===deger)return;if(typeof sendPrompt!=='function'){n.textContent='Sohbete yaz: '+satir;return;}sendPrompt(satir);gon=deger;sifirla();btn.disabled=true;btn.textContent='Yazı kutusuna kondu';n.textContent='Yazı kutusuna bir kez tıkla, sonra Enter.';}
-H.querySelectorAll('.t').forEach(function(t){t.addEventListener('click',function(){H.querySelectorAll('.t.on').forEach(function(x){x.classList.remove('on');});t.classList.add('on');sec=t.getAttribute('data-v');m.textContent='Seçildi: '+sec;if(gon!==sec){dv.disabled=false;dv.textContent='Devam et';}});});
-dv.addEventListener('click',function(){if(!sec){n.textContent='Önce bir kutuya tıkla.';return;}gonder(sec,'Altyazı şablonu · '+IS+' — Sablon: '+sec,dv);});
-gr.addEventListener('click',function(){gonder('geri','Altyazı şablonu · '+IS+' — Geri: ilk ekran',gr);});
+var sec=null,aks=null,yazildi=false,m=H.querySelector('#akm'),n=H.querySelector('#akn'),dv=H.querySelector('#akd'),gr=H.querySelector('#akg');
+function baglam(){return 'Altyazı kataloğu · '+IS+' — Son seçim: '+(aks==='geri'?'Geri (ilk ekran)':'Sablon '+sec);}
+function paylas(){try{if(window.app&&typeof app.sendRequest==='function'){var r=app.sendRequest({method:'ui/update-model-context',params:{content:[{type:'text',text:baglam()}]}});if(r&&r.catch)r.catch(function(){});}}catch(e){}}
+function koy(){if(yazildi)return true;if(typeof sendPrompt!=='function'){n.textContent='Sohbete yaz: '+(aks==='geri'?'geri':sec);return false;}sendPrompt('Altyazı şablonu · '+IS+' — seçim hazır');yazildi=true;return true;}
+function goster(){dv.disabled=aks==='devam';dv.textContent=aks==='devam'?'Yazı kutusuna kondu':'Devam et';gr.disabled=aks==='geri';gr.textContent=aks==='geri'?'Yazı kutusuna kondu':'Geri git';n.textContent=yazildi?'Yazı kutusuna bir kez tıkla, sonra Enter.':'';}
+H.querySelectorAll('.t').forEach(function(t){t.addEventListener('click',function(){H.querySelectorAll('.t.on').forEach(function(x){x.classList.remove('on');});t.classList.add('on');sec=t.getAttribute('data-v');m.textContent='Seçildi: '+sec;if(yazildi)aks='devam';paylas();goster();});});
+dv.addEventListener('click',function(){if(!sec){n.textContent='Önce bir kutuya tıkla.';return;}aks='devam';paylas();koy();goster();});
+gr.addEventListener('click',function(){aks='geri';paylas();koy();goster();});
 })();
