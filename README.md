@@ -18,3 +18,5 @@ v2.15 (2026-11-04): `adim.js` — "Adım adım özelleştir" tek widget'ta slayt
 <div id="altyazi-adim" data-is="KOD · SAAT">Yükleniyor…</div>
 <script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.15/adim.js"></script>
 ```
+
+v2.16 (2026-11-05): `adim.js` yeniden — sağ üstte sayfa sekmeleri (tıklayınca atlar), sol altta Geri git, sağ altta Devam et; her sayfada Other (yazı alanı); harf TT / Tt / tt / Standart; karaoke seçilince Dolum + Alt renk sayfaları. Seçim yalnız son sayfada tek satır olarak yazı kutusuna düşer. Adres `@v2.16/adim.js`.
