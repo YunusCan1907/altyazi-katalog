@@ -1,11 +1,11 @@
 # altyazi-katalog
 
-Cleanup altyazı aracının şablon kataloğu önizleme betiği (CSS + "TRY CLEANUP NOW" örnek metni + şablon adları). Şirket verisi, ham video ya da anahtar içermez.
-Claude Code sohbet widget'ı bu betiği jsDelivr üzerinden yükler:
+Cleanup altyazı aracının şablon kataloğu önizleme betikleri (CSS + "Try Cleanup now"ın pazar dilindeki örnek metni + şablon adları). Şirket verisi, ham video ya da anahtar içermez.
+Claude Code sohbet widget'ı pazarın betiğini jsDelivr üzerinden yükler (KOD = iş kodunun pazarı: ARSA, TR, JA, ESMX…):
 
 ```html
 <div id="altyazi-katalog" data-is="KOD · SAAT">Katalog yükleniyor…</div>
-<script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.11/katalog.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/YunusCan1907/altyazi-katalog@v2.12/katalog_ARSA.js"></script>
 ```
 
-`katalog_latin_disi.js`: Latin dışı yazılar (AR, HE, TH, JA, CN, KO, HI, BN) için yalnız 1–6.
+v2.12 (2026-11-04): her pazar kodu için `katalog_<KOD>.js` — o dilin cümlesi, aracın o dilde basacağı font, sağdan sola yazıda yön ve karaoke dolumu; 12 şablonun hepsi her dilde. `katalog.js` = EN.
