@@ -20,3 +20,5 @@ v2.15 (2026-11-04): `adim.js` — "Adım adım özelleştir" tek widget'ta slayt
 ```
 
 v2.16 (2026-11-05): `adim.js` yeniden — sağ üstte sayfa sekmeleri (tıklayınca atlar), sol altta Geri git, sağ altta Devam et; her sayfada Other (yazı alanı); harf TT / Tt / tt / Standart; karaoke seçilince Dolum + Alt renk sayfaları. Seçim yalnız son sayfada tek satır olarak yazı kutusuna düşer. Adres `@v2.16/adim.js`.
+
+v2.17 (2026-11-05): kişisel favoriler — katalogda `data-fav` özniteliği varsa sağ üstte "Şablonlar | Favoriler" sekmesi, favori kutuları seçimden çizilir (pazarın cümlesi ve fontu), her birinde Sil; özniteliği yoksa katalog eskisi gibi. Adım adım widget'ının son sayfasında "Favorilere kaydet ve devam et" / "Kaydetmeden devam et". Favori verisi bu depoda değil: her kullanıcının kendi makinesinde durur, widget'a Claude koyar. Adres `@v2.17/katalog_<PAZAR>.js`, `@v2.17/adim.js`.
